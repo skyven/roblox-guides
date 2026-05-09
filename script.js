@@ -74,36 +74,75 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const codeItems = document.querySelectorAll('.code-text');
-    codeItems.forEach(code => {
-        code.addEventListener('click', function() {
-            navigator.clipboard.writeText(this.textContent);
+    const codeItems = document.querySelectorAll('.code-item');
+    codeItems.forEach(item => {
+        item.addEventListener('click', async function() {
+            const codeText = this.querySelector('.code-text').textContent;
             
-            const originalText = this.textContent;
-            this.textContent = '已复制!';
-            this.style.color = '#00ff00';
-            
-            setTimeout(() => {
-                this.textContent = originalText;
-                this.style.color = '#ff6b6b';
-            }, 2000);
+            try {
+                await navigator.clipboard.writeText(codeText);
+                
+                const codeElement = this.querySelector('.code-text');
+                const originalText = codeElement.textContent;
+                const originalColor = codeElement.style.color;
+                
+                codeElement.textContent = '✓ 已复制!';
+                codeElement.style.color = '#00ff00';
+                codeElement.style.fontWeight = 'bold';
+                
+                this.style.background = 'rgba(0, 255, 0, 0.15)';
+                
+                setTimeout(() => {
+                    codeElement.textContent = originalText;
+                    codeElement.style.color = originalColor;
+                    codeElement.style.fontWeight = 'normal';
+                    this.style.background = '';
+                }, 2000);
+            } catch (err) {
+                console.error('复制失败:', err);
+            }
         });
     });
 
     const guideCards = document.querySelectorAll('.guide-card');
     guideCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px)';
+            this.style.transform = 'translateY(-12px) scale(1.02)';
         });
         
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
+    const tipCards = document.querySelectorAll('.tip-card');
+    tipCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            const icon = this.querySelector('.tip-icon');
+            if (icon) {
+                icon.style.transform = 'scale(1.2) rotate(5deg)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const icon = this.querySelector('.tip-icon');
+            if (icon) {
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            }
         });
     });
 
     const searchBtn = document.querySelector('.search-btn');
     searchBtn.addEventListener('click', function() {
         alert('搜索功能即将上线，敬请期待!');
+    });
+
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('社交媒体功能即将上线!');
+        });
     });
 
     const observerOptions = {
@@ -120,11 +159,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    const animatedElements = document.querySelectorAll('.guide-card, .tip-card, .code-category, .news-card');
-    animatedElements.forEach(el => {
+    const animatedElements = document.querySelectorAll('.guide-card, .tip-card, .code-category, .news-card, .stat-item');
+    animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
         observer.observe(el);
+    });
+
+    const heroTitle = document.querySelector('.hero h1');
+    if (heroTitle) {
+        heroTitle.style.opacity = '0';
+        heroTitle.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+            heroTitle.style.opacity = '1';
+            heroTitle.style.transform = 'translateY(0)';
+            heroTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        }, 300);
+    }
+
+    const heroButtons = document.querySelectorAll('.hero-buttons .btn');
+    heroButtons.forEach((btn, index) => {
+        btn.style.opacity = '0';
+        btn.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            btn.style.opacity = '1';
+            btn.style.transform = 'translateY(0)';
+            btn.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        }, 600 + index * 200);
+    });
+
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(15, 15, 26, 0.95)';
+            navbar.style.backdropFilter = 'blur(25px)';
+        } else {
+            navbar.style.background = 'rgba(15, 15, 26, 0.85)';
+            navbar.style.backdropFilter = 'blur(20px)';
+        }
     });
 });

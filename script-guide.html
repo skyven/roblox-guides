@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进阶脚本教程 - Roblox攻略大全</title>
+    <meta name="description" content="掌握Lua编程，打造高级游戏功能，学习专业开发者技巧">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=Roblox%20game%20logo%20with%20colorful%20blocks%20and%20robots%20minimalist%20design&image_size=square" alt="Roblox Logo">
+                <span>Roblox攻略大全</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="index.html#guides">游戏攻略</a></li>
+                <li><a href="index.html#tips">技巧教程</a></li>
+                <li><a href="index.html#codes">代码大全</a></li>
+                <li><a href="index.html#news">最新资讯</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="zh">中文</button>
+                <button class="lang-btn" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="es">Español</button>
+            </div>
+            <button class="search-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero" style="min-height: 60vh;">
+        <div class="hero-content">
+            <h1>✨ 进阶脚本教程</h1>
+            <p>掌握Lua编程，打造高级游戏功能，学习专业开发者技巧</p>
+            <div class="hero-buttons">
+                <a href="index.html" class="btn btn-secondary">返回首页</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://neeko-copilot.bytedance.net/api/text2image?prompt=code%20programming%20with%20neon%20lights%20and%20Lua%20script%20editor&image_size=landscape_16_9" alt="进阶脚本">
+        </div>
+    </section>
+
+    <section class="guides-section">
+        <div class="container">
+            <div class="content-section">
+                <h2 class="section-title">📚 目录</h2>
+                <div class="toc">
+                    <ul>
+                        <li><a href="#variables">变量与数据类型</a></li>
+                        <li><a href="#functions">函数与作用域</a></li>
+                        <li><a href="#events">事件系统</a></li>
+                        <li><a href="#oop">面向对象编程</a></li>
+                        <li><a href="#optimization">性能优化</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="variables" class="content-section">
+                <h2 class="section-title">📊 变量与数据类型</h2>
+                <div class="guide-content-detail">
+                    <p>Lua是一种动态类型语言，了解各种数据类型是编程的基础。</p>
+                    <h3>基本数据类型：</h3>
+                    <div class="code-box">
+                        <pre><code>-- 数字类型
+local age = 25
+local score = 95.5
+
+-- 字符串类型
+local name = "Roblox"
+local message = 'Hello World'
+
+-- 布尔类型
+local isOnline = true
+local isAdmin = false
+
+-- 表（类似数组/字典）
+local playerData = {
+    Name = "Player1",
+    Level = 10,
+    Items = {"Sword", "Shield"}
+}
+
+-- 空值
+local nothing = nil</code></pre>
+                    </div>
+                    <h3>类型转换：</h3>
+                    <div class="code-box">
+                        <pre><code>local num = 123
+local str = tostring(num)  -- "123"
+
+local text = "456"
+local number = tonumber(text)  -- 456</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div id="functions" class="content-section">
+                <h2 class="section-title">🔧 函数与作用域</h2>
+                <div class="guide-content-detail">
+                    <p>函数是组织代码的基本单元，理解作用域非常重要。</p>
+                    <h3>函数定义：</h3>
+                    <div class="code-box">
+                        <pre><code>-- 基本函数
+local function greet(name)
+    return "Hello, " .. name .. "!"
+end
+
+-- 带默认参数的函数
+local function add(a, b)
+    a = a or 0
+    b = b or 0
+    return a + b
+end
+
+-- 可变参数函数
+local function sum(...)
+    local total = 0
+    for _, num in ipairs{...} do
+        total = total + num
+    end
+    return total
+end</code></pre>
+                    </div>
+                    <h3>作用域规则：</h3>
+                    <ul>
+                        <li><code>local</code> 变量只在当前作用域内有效</li>
+                        <li>全局变量不加 <code>local</code> 声明</li>
+                        <li>函数内部可以访问外部变量，但不能修改</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="events" class="content-section">
+                <h2 class="section-title">🎯 事件系统</h2>
+                <div class="guide-content-detail">
+                    <p>Roblox使用事件驱动编程，理解事件系统是开发的关键。</p>
+                    <h3>常用事件：</h3>
+                    <div class="code-box">
+                        <pre><code>-- 触摸事件
+local part = script.Parent
+
+part.Touched:Connect(function(hit)
+    local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+    if player then
+        print(player.Name .. " touched the part")
+    end
+end)
+
+-- 玩家加入事件
+game.Players.PlayerAdded:Connect(function(player)
+    print(player.Name .. " joined the game")
+    
+    player.CharacterAdded:Connect(function(character)
+        print(player.Name .. "'s character spawned")
+    end)
+end)
+
+-- 键盘输入事件
+local UserInputService = game:GetService("UserInputService")
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed then
+        if input.KeyCode == Enum.KeyCode.Space then
+            print("Space pressed")
+        end
+    end
+end)</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div id="oop" class="content-section">
+                <h2 class="section-title">👨‍💻 面向对象编程</h2>
+                <div class="guide-content-detail">
+                    <p>Lua通过表实现面向对象编程，掌握它可以编写更清晰的代码。</p>
+                    <h3>创建类：</h3>
+                    <div class="code-box">
+                        <pre><code>-- 定义类
+local Player = {}
+Player.__index = Player
+
+-- 构造函数
+function Player.new(name, level)
+    local self = setmetatable({}, Player)
+    self.Name = name
+    self.Level = level
+    self.Health = 100
+    return self
+end
+
+-- 方法
+function Player:TakeDamage(amount)
+    self.Health = self.Health - amount
+    if self.Health <= 0 then
+        self:Die()
+    end
+end
+
+function Player:Die()
+    print(self.Name .. " has died!")
+end
+
+-- 使用类
+local player1 = Player.new("Warrior", 5)
+player1:TakeDamage(30)
+print(player1.Health)  -- 70</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div id="optimization" class="content-section">
+                <h2 class="section-title">⚡ 性能优化</h2>
+                <div class="guide-content-detail">
+                    <p>优化脚本性能可以提升游戏体验，以下是一些实用技巧。</p>
+                    <h3>优化技巧：</h3>
+                    <ul>
+                        <li><strong>减少全局查找：</strong>将常用服务存储在局部变量中</li>
+                        <li><strong>避免重复计算：</strong>缓存计算结果</li>
+                        <li><strong>使用合适的数据结构：</strong>选择正确的表类型</li>
+                        <li><strong>限制渲染对象：</strong>使用LOD技术</li>
+                    </ul>
+                    <h3>优化示例：</h3>
+                    <div class="code-box">
+                        <pre><code>-- 优化前：每次都查找服务
+while wait(1) do
+    game:GetService("Players"):GetPlayers()
+end
+
+-- 优化后：缓存服务引用
+local Players = game:GetService("Players")
+while task.wait(1) do
+    Players:GetPlayers()
+end
+
+-- 使用task.wait代替wait
+while task.wait(0.5) do
+    -- 代码
+end</code></pre>
+                    </div>
+                    <div class="tip-box">
+                        <strong>💡 提示：</strong>
+                        <p>使用Roblox Studio的Profiler工具分析性能瓶颈，找出需要优化的代码。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <p>致力于为Roblox玩家提供最全面的攻略和最新资讯，帮助每一位玩家成为游戏大师</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="index.html#guides">游戏攻略</a></li>
+                        <li><a href="index.html#tips">技巧教程</a></li>
+                        <li><a href="index.html#codes">代码大全</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <p>邮箱: contact@robloxguide.com</p>
+                    <p>微信: RobloxGuide2026</p>
+                </div>
+                <div class="footer-section">
+                    <h3>关注我们</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Roblox攻略大全. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
